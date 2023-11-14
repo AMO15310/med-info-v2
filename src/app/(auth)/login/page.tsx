@@ -18,17 +18,6 @@ const Login: React.FC = () => {
   const [error, setError] = useState<string>("");
   const router = useRouter();
   // const {isUserLoggedIn,checkLoggedIn} = useAuth()
-  const isLoggedIn = async () => {
-    const logged: any = await isLogged();
-    try {
-      if (logged.status!) {
-        toast.success("You are already logged in");
-        router.push("/home");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const {
     register,
@@ -40,20 +29,17 @@ const Login: React.FC = () => {
   const onSubmit = async (data: LoginFormInput) => {
     try {
       const response = await login(data);
-      console.log(response);
-
-      toast.success("Login successful");
-      router.push("/home");
+      if (response?.userId) {
+        toast.success("Login successful");
+        router.push("/home");
+        reset();
+      } else {
+        setError("check your credentials and try again");
+      }
     } catch (error: any) {
-      toast.error(error.message);
       setError(error.message);
-    } finally {
-      reset();
     }
   };
-  React.useEffect(() => {
-    isLoggedIn();
-  }, []);
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center h-screen bg-slate-900">

@@ -9,8 +9,8 @@ import { apiDomain } from "../utils/api";
 
 import { Client, Account, ID } from "appwrite";
 
-const client = new Client()
-  .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+export const client = new Client()
+  .setEndpoint(apiDomain)
   .setProject("655129254787cb88f723"); // Your project ID
 
 const account = new Account(client);
@@ -34,7 +34,7 @@ export const login = async (user: ILoginData) => {
     );
     return response;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 export const logout = async () => {
@@ -42,7 +42,7 @@ export const logout = async () => {
     const resp = await account.deleteSession("current");
     return resp;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -51,6 +51,6 @@ export const isLogged = async () => {
     const resp = await account.get();
     return resp;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };

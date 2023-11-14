@@ -41,18 +41,7 @@ export default function App() {
       setPath("/signup");
     }
   }, []);
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  const menuItems = [];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className=" p-5">
@@ -75,20 +64,20 @@ export default function App() {
         </NavbarItem>
 
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+          <Link href="/home" aria-current="page">
             Articles
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Blogs
+          <Link color="foreground" href="/blog">
+            Blog
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
+        {/* <NavbarItem className="hidden lg:flex">
           <Link href="/login">Login</Link>
-        </NavbarItem>
+        </NavbarItem> */}
         {isAuthenticated ? (
           <NavbarItem>
             <Button
