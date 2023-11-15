@@ -1,7 +1,85 @@
+"use client";
 import React from "react";
+import { useParams } from "next/navigation";
+import { fetchMyBlogs } from "@/appwrite/blogs.actions";
+import Loading from "../../home/loading";
+import Article from "@/components/Article";
+import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
 const MyBlog = () => {
-  return <div>MyBlog</div>;
+  const { slug } = useParams();
+  const [myBlogs, setMyBlogs] = React.useState<any>();
+  const [Admin, setIsAdmin] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const fetchData = async () => {
+    const user = slug.toString();
+    const resp = await fetchMyBlogs(user);
+    setMyBlogs(resp.documents);
+    setLoading(false);
+  };
+
+  const { isAdmin } = useAuth();
+  React.useEffect(() => {
+    fetchData();
+    setIsAdmin(isAdmin);
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <>
+        <header className="bg-slate-800 shadow rounded-md m-2">
+          <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold leading-tight text-white">
+              My blogs
+            </h1>
+          </div>
+        </header>
+        <div className=" flex justify-center items-center  mt-[50%] ">
+          <Loading />
+        </div>
+      </>
+    );
+  }
+  if (!loading && myBlogs.length === 0) {
+    return (
+      <>
+        <header className="bg-slate-800 shadow rounded-md m-2">
+          <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold leading-tight text-white">
+              My blogs
+            </h1>
+          </div>
+        </header>
+        <div className=" flex justify-center items-center mt-[3rem]">
+          <img src="/empty.svg" alt="nothing here" />
+        </div>
+        <div className="text-white text-center mt-[2rem] text-xl">
+          There is nothing here!{" "}
+          <Link href="/blog">
+            {" "}
+            <span className="text-blue-600">create new</span>
+          </Link>
+        </div>
+      </>
+    );
+  }
+  return (
+    <div>
+      <header className="bg-slate-800 shadow rounded-md m-2">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold leading-tight text-white">
+            My blogs
+          </h1>
+        </div>
+      </header>
+      <div className="flex justify-center">
+        <div className="w-3/4">
+          <Article allArticles={myBlogs} admin={Admin} />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default MyBlog;

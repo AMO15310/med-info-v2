@@ -5,18 +5,24 @@ import { isLogged, logout } from "@/appwrite/auth.actions";
 import { useRouter } from "next/navigation";
 import Loading from "./loading";
 import Article from "@/components/Article";
+import { useAuth } from "@/context/AuthContext";
 
 const Home = () => {
   const [allArticles, setAllArticles] = React.useState<any>([]);
   const [name, setName] = React.useState<string>();
   const [loading, setLoading] = React.useState<boolean>(true);
   const [email, setEmail] = React.useState<string>();
+  const [user, setUser] = React.useState<string>();
+  const [Admin, setIsAdmin] = React.useState<boolean>(false);
 
   const router = useRouter();
+  const authContext = useAuth();
+
   const getUser = async () => {
     const isLoggedIn = await isLogged();
     try {
-      const { name, status, email } = isLoggedIn!;
+      const { name, status, email, $id } = isLoggedIn!;
+      setUser($id);
       setName(name);
       setEmail(email);
       if (!status) {
@@ -30,16 +36,21 @@ const Home = () => {
     await logout();
     router.push("/login");
   };
+  const myBlogNavigate = () => {
+    router.push(`/blog/${user}`);
+  };
 
   const fetchData = async () => {
     const resp = await getArticles();
-    // const image = await getImage(resp.documents.imageId)
     console.log(resp.documents);
 
     setAllArticles(resp.documents);
 
     setLoading(false);
   };
+  React.useEffect(() => {
+    setIsAdmin(authContext.isAdmin);
+  }, [authContext.isAdmin]);
   React.useEffect(() => {
     fetchData();
     getUser();
@@ -87,15 +98,20 @@ const Home = () => {
               {/* Articles Section */}
               {/* ////////////// */}
               <div className="w-full">
-                <Article allArticles={allArticles} />
+                <Article allArticles={allArticles} admin={Admin} />
               </div>
               {/* Sidebar for Links */}
               <div className="w-1/4 pl-4">
                 <div className="bg-white overflow-hidden shadow rounded-lg p-4">
                   <h3 className=" text-sm text-black"></h3>
-                  <ul className=" space-y-2">
+                  <ul className=" space-y-2 cursor-pointer">
                     <li>
-                      <p className="text-black hover:text-blue-800">@{name}</p>
+                      <div className="flex justify-between">
+                        <p className="text-black hover:text-blue-800">
+                          @{name}
+                        </p>
+                        {Admin && <p className="text-blue-500">admin</p>}
+                      </div>
                     </li>
                     <li>
                       <p
@@ -107,7 +123,7 @@ const Home = () => {
                     </li>
                     <li>
                       <p
-                        // onClick={() => logoutUser()}
+                        onClick={() => myBlogNavigate()}
                         className="text-black hover:text-blue-800"
                       >
                         my blogs

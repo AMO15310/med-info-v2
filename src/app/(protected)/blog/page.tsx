@@ -6,7 +6,6 @@ import { isLogged } from "@/appwrite/auth.actions";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 import ReactMarkdown from "react-markdown";
-import { marked } from "marked";
 
 const Blog = () => {
   const {
@@ -40,18 +39,24 @@ const Blog = () => {
       setSelectedImage(event.target.files[0]);
     }
   };
-  const uploadSelected = async () => {
-    const resp = await uploadImage(selectedImage);
-    console.log(resp.$id);
-    setImageId(resp.$id);
-  };
 
+  const uploadSelectedImage = async (image: File) => {
+    try {
+      const resp = await uploadImage(image);
+      setImageId(resp.$id);
+      toast.success("Image uploaded!");
+    } catch (error) {
+      toast.error("Failed to upload image!");
+    }
+  };
   React.useEffect(() => {
-    uploadSelected();
+    if (selectedImage) {
+      uploadSelectedImage(selectedImage);
+    }
   }, [selectedImage]);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10">
+    <div className="min-h-screen bg-slate-900 py-10">
       <div className="container mx-auto">
         <ToastContainer />
         <div className="bg-white rounded-lg shadow p-8">

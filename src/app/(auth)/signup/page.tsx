@@ -30,12 +30,10 @@ export const SignUp: React.FC = () => {
   } = useForm<SignUpFormData>();
 
   const onSubmit = async (data: SignUpFormData) => {
-    console.log("Form data submitted:", data);
     // Handle form submission, like making an API call
     // ...
     try {
       const resp = await signup(data);
-      console.log(resp);
       toast.success("User created successfully");
       router.push("/login");
     } catch (error: any) {

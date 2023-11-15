@@ -12,8 +12,9 @@ import {
   Button,
 } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
-import { isLogged, logout } from "@/appwrite/auth.actions.ts";
+import { logout } from "@/appwrite/auth.actions.ts";
 import { useRouter } from "next/navigation.js";
+import { useAuth } from "@/context/AuthContext.tsx";
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isLoginTime, setIsLoginTime] = React.useState(false);
@@ -21,12 +22,10 @@ export default function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false || null);
   const router = useRouter();
   const checkLogin = async () => {
-    const authStatus = await isLogged();
-
     try {
-      const { status } = authStatus;
-      setIsAuthenticated(status);
-      if (!status) {
+      const { isUserLoggedIn } = useAuth();
+      setIsAuthenticated(isUserLoggedIn);
+      if (!isUserLoggedIn) {
         router.push("/login");
       }
     } catch (error) {
@@ -44,7 +43,12 @@ export default function App() {
   const menuItems = [];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className=" p-5">
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      className=" p-5"
+      shouldHideOnScroll
+      position="static"
+    >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={<img src="/burger.svg" alt="toggle" />}

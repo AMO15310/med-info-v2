@@ -1,5 +1,5 @@
 import { client } from "./auth.actions";
-import { Databases, ID, Storage } from "appwrite";
+import { Databases, ID, Query, Storage } from "appwrite";
 
 const database = new Databases(client);
 
@@ -34,6 +34,31 @@ export const createNewBlog = async (data: BlogType) => {
       "6551d95cb3023ff059cd",
       ID.unique(),
       data
+    );
+    return resp;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchMyBlogs = async (user: string) => {
+  try {
+    const resp = await database.listDocuments(
+      "6551d923210e659fc4cf",
+      "6551d95cb3023ff059cd",
+      [Query.equal("author_id", user)]
+    );
+    return resp;
+  } catch (error) {
+    throw error;
+  }
+};
+export const deleteBlog = async (document: string) => {
+  try {
+    const resp = await database.deleteDocument(
+      "6551d923210e659fc4cf",
+      "6551d95cb3023ff059cd",
+      document
     );
     return resp;
   } catch (error) {
