@@ -32,12 +32,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userId, setUserId] = useState("");
   const checkLoggedIn = async () => {
     const logged: any = await isLogged();
-    setIsLoggedIn(logged.status);
+    if (logged) {
+      setIsLoggedIn(logged.status);
 
-    setUserId(logged.$id);
-
-    if (admins?.includes(logged.$id)) {
-      setIsAdmin(true);
+      setUserId(logged.$id);
+      if (admins?.includes(logged.$id)) {
+        setIsAdmin(true);
+      }
     }
   };
 

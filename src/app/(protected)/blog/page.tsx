@@ -42,7 +42,7 @@ const Blog = () => {
 
   const uploadSelectedImage = async (image: File) => {
     try {
-      const resp = await uploadImage(image);
+      const resp: any = await uploadImage(image);
       setImageId(resp.$id);
       toast.success("Image uploaded!");
     } catch (error) {
@@ -92,7 +92,7 @@ const Blog = () => {
               <div className="mt-4">
                 <p className=" text-gray-500 text-sm font-bold mb-2">Preview</p>
                 <div className="preview bg-gray-100 p-4 rounded text-gray-700">
-                  <ReactMarkdown children={contentMarkdown} />
+                  <ReactMarkdown>{contentMarkdown}</ReactMarkdown>
                 </div>
               </div>
             </div>
