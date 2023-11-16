@@ -15,33 +15,42 @@ import { AcmeLogo } from "./AcmeLogo.jsx";
 import { logout } from "@/appwrite/auth.actions.ts";
 import { useRouter } from "next/navigation.js";
 import { useAuth } from "@/context/AuthContext.tsx";
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isLoginTime, setIsLoginTime] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [path, setPath] = React.useState("/login");
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false || null);
   const router = useRouter();
+
+  const { isUserLoggedIn, checkLoggedIn } = useAuth();
   const checkLogin = async () => {
-    try {
-      const { isUserLoggedIn } = useAuth();
-      setIsAuthenticated(isUserLoggedIn);
-      if (!isUserLoggedIn) {
-        router.push("/login");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    await checkLoggedIn();
   };
 
   React.useEffect(() => {
     checkLogin();
+
+    setIsLoginTime(false);
+    setLoggedIn(true);
+  }, [router.pathname]);
+
+  React.useEffect(() => {
     if (window.location.pathname === "/login") {
       setIsLoginTime(true);
       setPath("/signup");
     }
   }, []);
   const menuItems = [];
-
+  const logOutUser = async () => {
+    try {
+      await logout();
+      await checkLogin();
+      setLoggedIn(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
@@ -56,7 +65,12 @@ export default function App() {
         />
         <NavbarBrand>
           <AcmeLogo />
-          <p className="font-bold text-inherit">MedInfoPlus</p>
+          <p
+            className="font-bold text-inherit"
+            onClick={() => router.push("/")}
+          >
+            MedInfoPlus
+          </p>
         </NavbarBrand>
       </NavbarContent>
 
@@ -82,10 +96,10 @@ export default function App() {
         {/* <NavbarItem className="hidden lg:flex">
           <Link href="/login">Login</Link>
         </NavbarItem> */}
-        {isAuthenticated ? (
+        {loggedIn ? (
           <NavbarItem>
             <Button
-              onClick={() => logout()}
+              onClick={logOutUser}
               as={Link}
               color="primary"
               href="/login"

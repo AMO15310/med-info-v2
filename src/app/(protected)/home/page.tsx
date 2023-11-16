@@ -16,41 +16,50 @@ const Home = () => {
   const [Admin, setIsAdmin] = React.useState<boolean>(false);
 
   const router = useRouter();
-  const authContext = useAuth();
+  const { isAdmin } = useAuth();
 
   const getUser = async () => {
-    const isLoggedIn = await isLogged();
     try {
-      const { name, status, email, $id } = isLoggedIn!;
-      setUser($id);
-      setName(name);
-      setEmail(email);
-      if (!status) {
+      const isLoggedIn = await isLogged();
+      try {
+        const { name, email, $id } = isLoggedIn!;
+        setUser($id);
+        setName(name);
+        setEmail(email);
+        if (!$id) {
+          router.push("/login");
+        }
+      } catch (error) {
+        console.log(error);
         router.push("/login");
       }
     } catch (error) {
-      console.log(error);
+      router.push("/login");
     }
   };
   const logoutUser = async () => {
-    await logout();
-    router.push("/login");
+    try {
+      await logout();
+      router.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
   const myBlogNavigate = () => {
     router.push(`/blog/${user}`);
   };
 
   const fetchData = async () => {
-    const resp = await getArticles();
-    console.log(resp.documents);
-
-    setAllArticles(resp.documents);
+    const resp: any = await getArticles();
+    if (resp) {
+      setAllArticles(resp.documents);
+    }
 
     setLoading(false);
   };
   React.useEffect(() => {
-    setIsAdmin(authContext.isAdmin);
-  }, [authContext.isAdmin]);
+    setIsAdmin(isAdmin);
+  }, [isAdmin]);
   React.useEffect(() => {
     fetchData();
     getUser();

@@ -3,7 +3,7 @@ import { Databases, ID, Query, Storage } from "appwrite";
 
 const database = new Databases(client);
 
-type BlogType = {
+export type BlogType = {
   title: string;
   content: string;
   author: string;
@@ -15,17 +15,21 @@ type BlogType = {
 const storage = new Storage(client);
 
 export const uploadImage = async (image: any) => {
-  const resp = await storage.createFile(
-    "65536ee7f3194d75946d",
-    ID.unique(),
-    image
-  );
-  return resp;
+  try {
+    const resp = await storage.createFile(
+      "65536ee7f3194d75946d",
+      ID.unique(),
+      image
+    );
+    return resp;
+  } catch (error) {}
 };
 
 export const getImage = async (id: string) => {
-  const resp = await storage.getFileView("65536ee7f3194d75946d", id);
-  return resp;
+  try {
+    const resp = await storage.getFileView("65536ee7f3194d75946d", id);
+    return resp;
+  } catch (error) {}
 };
 export const createNewBlog = async (data: BlogType) => {
   try {
@@ -37,7 +41,7 @@ export const createNewBlog = async (data: BlogType) => {
     );
     return resp;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 
@@ -50,7 +54,7 @@ export const fetchMyBlogs = async (user: string) => {
     );
     return resp;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 export const deleteBlog = async (document: string) => {
@@ -62,6 +66,6 @@ export const deleteBlog = async (document: string) => {
     );
     return resp;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };

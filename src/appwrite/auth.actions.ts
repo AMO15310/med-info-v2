@@ -22,7 +22,7 @@ export const signup = async (user: SignUpFormData) => {
     const response = await account.create(ID.unique(), email, password, name);
     return response;
   } catch (error: any) {
-    throw new Error(error);
+    console.log(error);
   }
 };
 
@@ -34,7 +34,7 @@ export const login = async (user: ILoginData) => {
     );
     return response;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 export const logout = async () => {
@@ -42,7 +42,7 @@ export const logout = async () => {
     const resp = await account.deleteSession("current");
     return resp;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 
@@ -51,6 +51,6 @@ export const isLogged = async () => {
     const resp = await account.get();
     return resp;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
