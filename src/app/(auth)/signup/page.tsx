@@ -16,7 +16,7 @@ interface SignUpFormData {
   confirmPassword: string;
 }
 
-export const SignUp: React.FC = () => {
+export const Signup = () => {
   const [showOptions, setShowOptions] = useState<boolean>(true);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -192,4 +192,4 @@ export const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default Signup;
