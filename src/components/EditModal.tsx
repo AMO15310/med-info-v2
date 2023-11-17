@@ -108,10 +108,10 @@ const EditModal: React.FC<EditModalProps> = ({
               onChange={handleImageChange}
             />
             {editedArticle.imageSrc && !imageFile && (
-              <Image
+              <img
                 src={editedArticle.imageSrc}
-                height={60}
-                width={60}
+                // height={60}
+                // width={60}
                 alt="Current Article"
                 className="mt-4 max-h-60 w-auto object-cover"
               />
