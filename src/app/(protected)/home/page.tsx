@@ -64,7 +64,7 @@ const Home = () => {
   React.useEffect(() => {
     fetchData();
     getUser();
-  }, []);
+  });
   if (loading) {
     return (
       <div className=" flex justify-center items-center  mt-[50%] ">

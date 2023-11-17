@@ -24,7 +24,7 @@ const MyBlog = () => {
   React.useEffect(() => {
     fetchData();
     setIsAdmin(isAdmin);
-  }, [slug]);
+  });
 
   if (loading) {
     return (

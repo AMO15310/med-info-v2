@@ -37,8 +37,8 @@ export default function Home() {
           </div>
         </div>
         <p className="">
-          "Empowering Your Health Journey with Trusted Insights and Medical
-          Wisdom"
+          &quot;Empowering Your Health Journey with Trusted Insights and Medical
+          Wisdom&quot;
         </p>
       </div>
     </main>

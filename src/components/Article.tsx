@@ -51,8 +51,8 @@ const Article = ({
     if (allArticles.length) {
       fetchImagesAndSetArticles();
     }
-  }, [allArticles]);
-  console.log(articles);
+  });
+  // console.log(articles);
 
   const handleEdit = (article: any) => {
     setEditingArticle(article);
@@ -173,11 +173,11 @@ const Article = ({
             )}
           </div>
           {article.imageSrc && (
-            <Image
-              src={article.imageSrc.href}
+            <img
+              src={article.imageSrc}
               alt={article.title}
-              width={300}
-              height={300}
+              // width={300}
+              // height={300}
               className="w-full h-auto mb-4 mt-2"
             />
           )}

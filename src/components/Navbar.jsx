@@ -34,7 +34,7 @@ export default function App() {
 
     setIsLoginTime(false);
     setLoggedIn(true);
-  }, [router.pathname]);
+  });
 
   React.useEffect(() => {
     if (window.location.pathname === "/login") {
