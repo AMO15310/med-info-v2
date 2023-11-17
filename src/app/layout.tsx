@@ -4,9 +4,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import { AuthProvider } from "@/context/AuthContext";
 const inter = Inter({ subsets: ["latin"] });
-import { useAuth } from "@/context/AuthContext";
 import React from "react";
-import { useRouter } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "MedInfoPlus",
