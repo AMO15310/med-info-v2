@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { isLogged, login } from "@/appwrite/auth.actions";
 // import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
 
 interface LoginFormInput {
   email: string;
@@ -44,7 +45,13 @@ const Login: React.FC = () => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center h-screen bg-slate-900">
       <div className="mb-4 md:mb-0 md:w-1/2 flex justify-center p-4">
-        <img className="h-32 md:h-48" src="/se.png" alt="Login" />
+        <Image
+          className="h-32 md:h-48"
+          src="/se.png"
+          alt="Login"
+          height={200}
+          width={200}
+        />
       </div>
       <ToastContainer />
       <div className="w-full md:w-1/2 max-w-md p-6 bg-white rounded-lg shadow-md">

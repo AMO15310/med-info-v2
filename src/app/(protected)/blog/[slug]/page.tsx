@@ -6,6 +6,7 @@ import Loading from "../../home/loading";
 import Article from "@/components/Article";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
+import Image from "next/image";
 
 const MyBlog = () => {
   const { slug } = useParams();
@@ -14,7 +15,7 @@ const MyBlog = () => {
   const [loading, setLoading] = React.useState<boolean>(true);
   const fetchData = async () => {
     const user = slug.toString();
-    const resp = await fetchMyBlogs(user);
+    const resp: any = await fetchMyBlogs(user);
     setMyBlogs(resp.documents);
     setLoading(false);
   };
@@ -52,7 +53,7 @@ const MyBlog = () => {
           </div>
         </header>
         <div className=" flex justify-center items-center mt-[3rem]">
-          <img src="/empty.svg" alt="nothing here" />
+          <Image src="/empty.svg" alt="nothing here" height={200} width={200} />
         </div>
         <div className="text-white text-center mt-[2rem] text-xl">
           There is nothing here!{" "}

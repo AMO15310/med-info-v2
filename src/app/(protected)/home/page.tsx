@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Loading from "./loading";
 import Article from "@/components/Article";
 import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
 
 const Home = () => {
   const [allArticles, setAllArticles] = React.useState<any>([]);
@@ -82,7 +83,7 @@ const Home = () => {
           </div>
         </header>
         <div className=" flex justify-center items-center mt-[3rem]">
-          <img src="/empty.svg" alt="nothing here" />
+          <Image src="/empty.svg" alt="nothing here" height={200} width={200} />
         </div>
         <div className="text-white text-center mt-[2rem] text-xl">
           There is nothing here!

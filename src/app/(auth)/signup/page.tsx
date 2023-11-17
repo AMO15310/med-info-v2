@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { signup } from "@/appwrite/auth.actions";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface SignUpFormData {
   name: string;
@@ -46,7 +47,13 @@ export const SignUp: React.FC = () => {
   return (
     <div className="md:flex justify-center items-center sm:h-screen">
       <div className="clip-path w-full md:w-[50%] h-[15%] md:h-full bg-slate-900 flex items-center justify-center">
-        <img className="h-[6rem] md:h-auto" src="/se.png" alt="" />
+        <Image
+          className="h-[6rem] md:h-auto"
+          src="/se.png"
+          alt=""
+          width={200}
+          height={200}
+        />
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}

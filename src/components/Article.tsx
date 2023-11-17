@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 import { useAuth } from "@/context/AuthContext";
 import EditModal from "./EditModal";
+import Image from "next/image";
 import { BlogType } from "@/appwrite/blogs.actions";
 import { updateArticles } from "@/appwrite/articles.actions";
 const Article = ({
@@ -51,6 +52,8 @@ const Article = ({
       fetchImagesAndSetArticles();
     }
   }, [allArticles]);
+  console.log(articles);
+
   const handleEdit = (article: any) => {
     setEditingArticle(article);
     setIsModalOpen(true);
@@ -130,15 +133,19 @@ const Article = ({
             <h3>{article.title}</h3>
             {isAdmin && (
               <div className="flex gap-3">
-                <img
+                <Image
                   onClick={() => handleEdit(article)}
                   src="/edit.svg"
                   alt="edit"
+                  width={6}
+                  height={6}
                   className="w-6 h-6 cursor-pointer"
                 />
-                <img
+                <Image
                   onClick={() => handleDelete(article.$id)}
                   src="/delete.svg"
+                  width={6}
+                  height={6}
                   alt="delete"
                   className="w-6 h-6 cursor-pointer"
                 />
@@ -146,15 +153,19 @@ const Article = ({
             )}
             {!isAdmin && user === article.author_id && (
               <div className="flex gap-3">
-                <img
+                <Image
                   onClick={() => handleEdit(article)}
                   src="/edit.svg"
                   alt="edit"
+                  width={6}
+                  height={6}
                   className="w-6 h-6 cursor-pointer"
                 />
-                <img
+                <Image
                   onClick={() => handleDelete(article.$id)}
                   src="/delete.svg"
+                  width={6}
+                  height={6}
                   alt="delete"
                   className="w-6 h-6 cursor-pointer"
                 />
@@ -162,9 +173,11 @@ const Article = ({
             )}
           </div>
           {article.imageSrc && (
-            <img
-              src={article.imageSrc}
+            <Image
+              src={article.imageSrc.href}
               alt={article.title}
+              width={300}
+              height={300}
               className="w-full h-auto mb-4 mt-2"
             />
           )}

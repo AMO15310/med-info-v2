@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image.js";
 import {
   Navbar,
   NavbarBrand,
@@ -60,7 +61,9 @@ export default function App() {
     >
       <NavbarContent>
         <NavbarMenuToggle
-          aria-label={<img src="/burger.svg" alt="toggle" />}
+          aria-label={
+            <Image height={25} width={25} src="/burger.svg" alt="toggle" />
+          }
           className="sm:hidden"
         />
         <NavbarBrand>

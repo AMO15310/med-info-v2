@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Image from "next/image";
 interface EditModalProps {
   isOpen: boolean;
   article: any; // Using 'any' type as per your request
@@ -108,8 +108,10 @@ const EditModal: React.FC<EditModalProps> = ({
               onChange={handleImageChange}
             />
             {editedArticle.imageSrc && !imageFile && (
-              <img
+              <Image
                 src={editedArticle.imageSrc}
+                height={60}
+                width={60}
                 alt="Current Article"
                 className="mt-4 max-h-60 w-auto object-cover"
               />
