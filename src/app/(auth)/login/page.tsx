@@ -103,7 +103,7 @@ const Login: React.FC = () => {
             Login
           </button>
           <p className="text-center mt-3 flex flex-col">
-            Don't have an account?
+            Don&apos;t have an account?
             <Link
               href="/signup"
               className="text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out"
