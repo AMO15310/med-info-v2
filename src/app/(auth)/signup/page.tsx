@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { signup } from "@/appwrite/auth.actions";
 import { useRouter } from "next/navigation";
+import { NextPage } from "next";
 import Image from "next/image";
 
 interface SignUpFormData {
@@ -16,7 +17,7 @@ interface SignUpFormData {
   confirmPassword: string;
 }
 
-export const Signup = () => {
+export const Page: NextPage = () => {
   const [showOptions, setShowOptions] = useState<boolean>(true);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -34,7 +35,7 @@ export const Signup = () => {
     // Handle form submission, like making an API call
     // ...
     try {
-      const resp = await signup(data);
+      await signup(data);
       toast.success("User created successfully");
       router.push("/login");
     } catch (error: any) {
@@ -192,4 +193,4 @@ export const Signup = () => {
   );
 };
 
-export default Signup;
+export default Page;
