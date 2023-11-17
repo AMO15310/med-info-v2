@@ -41,7 +41,7 @@ export default function App() {
       setIsLoginTime(true);
       setPath("/signup");
     }
-  }, []);
+  });
   const menuItems = [];
   const logOutUser = async () => {
     try {
