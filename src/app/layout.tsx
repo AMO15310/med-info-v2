@@ -9,8 +9,10 @@ import React from "react";
 export const metadata: Metadata = {
   title: "MedInfoPlus",
   description: "Find any medical article and write your blogs",
-  name="google-adsense-account",
-  content="ca-pub-4817769699396256"
+  openGraph: {
+    name="google-adsense-account",
+    content="ca-pub-4817769699396256",
+  },
 };
 
 export default function RootLayout({
