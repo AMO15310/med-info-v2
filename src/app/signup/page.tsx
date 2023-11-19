@@ -30,7 +30,7 @@ const SignUpPage: React.FC = () => {
   const onSubmit = async (data: SignUpFormData) => {
     try {
       await signup(data);
-      toast.success("User created successfully");
+      toast.success("User created successfully!");
       router.push("/login");
     } catch (error: any) {
       toast.error(error.message);
