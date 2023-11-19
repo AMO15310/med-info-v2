@@ -2,6 +2,8 @@
 import { AcmeLogo } from "@/components/AcmeLogo";
 import React from "react";
 import { useRouter } from "next/navigation";
+import Script from "next/script";
+
 // import { isLogged } from "@/appwrite/auth.actions";
 
 export default function Home() {
@@ -29,6 +31,10 @@ export default function Home() {
   }, []);
   return (
     <main className="flex items-center  h-screen">
+      <Script
+        crossOrigin="anonymous"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4817769699396256"
+      />
       <div className=" my-auto mx-auto ">
         <div className=" items-center">
           <div className=" flex">
