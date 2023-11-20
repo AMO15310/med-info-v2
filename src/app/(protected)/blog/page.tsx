@@ -6,6 +6,7 @@ import { isLogged } from "@/appwrite/auth.actions";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 import ReactMarkdown from "react-markdown";
+import Script from "next/script";
 
 const Blog = () => {
   const {
@@ -57,6 +58,10 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-slate-900 py-10">
+      <Script
+        crossOrigin="anonymous"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4817769699396256"
+      />
       <div className="container mx-auto">
         <ToastContainer />
         <div className="bg-white rounded-lg shadow p-8">

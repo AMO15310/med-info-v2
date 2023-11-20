@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { signup } from "@/appwrite/auth.actions";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Script from "next/script";
 
 interface SignUpFormData {
   name: string;
@@ -40,6 +41,10 @@ const SignUpPage: React.FC = () => {
 
   return (
     <div className="md:flex justify-center items-center sm:h-screen">
+      <Script
+        crossOrigin="anonymous"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4817769699396256"
+      />
       <div className="clip-path w-full md:w-[50%] h-[15%] md:h-full bg-slate-900 flex items-center justify-center">
         <Image
           className="h-[6rem] md:h-auto"

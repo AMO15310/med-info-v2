@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import Script from "next/script";
+
 // import { FaYahoo, FaMicrosoft, FaGoogle } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -35,7 +37,7 @@ const Login: React.FC = () => {
         router.push("/home");
         reset();
       } else {
-        setError("check your credentials and try again");
+        setError("check your credentials and try again!");
       }
     } catch (error: any) {
       setError(error.message);
@@ -44,6 +46,10 @@ const Login: React.FC = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center h-screen bg-slate-900">
+      <Script
+        crossOrigin="anonymous"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4817769699396256"
+      />
       <div className="mb-4 md:mb-0 md:w-1/2 flex justify-center p-4">
         <Image
           className="h-32 md:h-48"

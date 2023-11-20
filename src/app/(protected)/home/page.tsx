@@ -7,6 +7,7 @@ import Loading from "./loading";
 import Article from "@/components/Article";
 import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
+import Script from "next/script";
 
 const Home = () => {
   const [allArticles, setAllArticles] = React.useState<any>([]);
@@ -76,6 +77,10 @@ const Home = () => {
     return (
       <>
         <header className="bg-slate-800 shadow rounded-md m-2">
+          <Script
+            crossOrigin="anonymous"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4817769699396256"
+          />
           <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold leading-tight text-white">
               Medical Articles
